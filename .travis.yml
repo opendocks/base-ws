@@ -9,6 +9,7 @@ env:
     - PHP_VERSION=70 IMAGE_TAG=7.0
     - PHP_VERSION=71 IMAGE_TAG=7.1
     - PHP_VERSION=72 IMAGE_TAG=7.2
+    - PHP_VERSION=73 IMAGE_TAG=7.3
 
 # Installing a newer Docker version
 before_install:
