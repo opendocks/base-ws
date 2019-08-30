@@ -21,6 +21,8 @@ before_install:
   - sudo apt-get -y install docker-ce
   - docker version
 
+# Main Script
 script: ./travis-main.sh
 
+# Only Execute if above script completed successfully
 after_success: ./travis-success.sh
