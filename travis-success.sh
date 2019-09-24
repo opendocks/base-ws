@@ -7,5 +7,5 @@ docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
 
 #### Push the Docker Images
 if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-  docker push ${DOCKER_USERNAME}/base-ws:${IMAGE_TAG}
+  docker push ${DOCKER_ORGANIZATION}/base-ws:${IMAGE_TAG}
 fi
