@@ -28,11 +28,9 @@ RUN apt-get install -y software-properties-common && \
 #
 
 # Install "PHP Extentions", "libraries", "Software's"
-RUN dpkg --configure -a && \
-    apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -f -y --allow-downgrades --allow-remove-essential \
-        --allow-change-held-packages \
+RUN apt-get update && \
+    apt-get upgrade -o DPkg::Options::="--force-confnew" -y --no-install-recommends --allow-downgrades --allow-remove-essential --allow-change-held-packages && \
+    apt-get install -o DPkg::Options::="--force-confnew" -y --no-install-recommends --allow-downgrades --allow-remove-essential --allow-change-held-packages --allow-change-held-packages \
         php7.3-cli \
         php7.3-common \
         php7.3-curl \
