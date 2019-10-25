@@ -4,6 +4,6 @@
 set -xe
 
 #### Build the Docker Images
-if [ -n "${PHP_VERSION}" ]; then
-    docker build -f ./Dockerfile-${PHP_VERSION} -t ${DOCKER_ORGANIZATION}/base-ws:${IMAGE_TAG} .
+if [ -n "${FILE_IDENTIFIER}" ]; then
+    docker build -f ./Dockerfile-${FILE_IDENTIFIER} -t ${DOCKER_ORGANIZATION}/base-ws:${IMAGE_TAG} .
 fi
