@@ -19,9 +19,12 @@ jobs:
         env:
           FILE_IDENTIFIER: ${{ matrix.data[0] }}
           TAG_NAME: ${{ matrix.data[1] }}
+          DOCKER_ORGANIZATION: ${{ secrets.DOCKER_ORGANIZATION }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           set -eux
-          docker build -f ./Dockerfile-$FILE_IDENTIFIER -t ${{ secrets.DOCKER_ORGANIZATION }}/base-ws:$TAG_NAME .
-          docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-          docker push ${DOCKER_ORGANIZATION}/base-ws:$TAG_NAME
+          docker build -f ./Dockerfile-$FILE_IDENTIFIER -t $DOCKER_ORGANIZATION/base-ws:$TAG_NAME .
+          docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+          docker push $DOCKER_ORGANIZATION/base-ws:$TAG_NAME
 
