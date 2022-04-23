@@ -6,25 +6,43 @@ on:
   pull_request:
     branches: main
 
+env:
+  DOCKER_ORGANIZATION: ${{ secrets.DOCKER_ORGANIZATION }}
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
 jobs:
   build-php:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        data: [ ["php56", "php5.6"], ["php70", "php7.0"], ["php71", "php7.1"], ["php72", "php7.2"], ["php73", "php7.3"], ["php74", "php7.4"], ["php80", "php8.0"], ["general", "general"] ]
+        data: [ ["php56", "php5.6"], ["php70", "php7.0"], ["php71", "php7.1"], ["php72", "php7.2"], ["php73", "php7.3"], ["php74", "php7.4"], ["php80", "php8.0"], ["php81", "php8.1"] ]
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
         env:
           FILE_IDENTIFIER: ${{ matrix.data[0] }}
           TAG_NAME: ${{ matrix.data[1] }}
-          DOCKER_ORGANIZATION: ${{ secrets.DOCKER_ORGANIZATION }}
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           set -eux
           docker build -f ./Dockerfile-$FILE_IDENTIFIER -t $DOCKER_ORGANIZATION/base-ws:$TAG_NAME .
           docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
           docker push $DOCKER_ORGANIZATION/base-ws:$TAG_NAME
-
+  build-other:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        data: [ ["general", "general"] ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        env:
+          FILE_IDENTIFIER: ${{ matrix.data[0] }}
+          TAG_NAME: ${{ matrix.data[1] }}
+        run: |
+          set -eux
+          docker build -f ./Dockerfile-$FILE_IDENTIFIER -t $DOCKER_ORGANIZATION/base-ws:$TAG_NAME .
+          docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+          docker push $DOCKER_ORGANIZATION/base-ws:$TAG_NAME
