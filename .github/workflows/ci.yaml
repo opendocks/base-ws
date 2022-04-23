@@ -21,7 +21,7 @@ jobs:
           WITH_DOT: ${{ matrix.php_version[1] }}
         run: |
           set -eux
-          docker build -f ./Dockerfile-${{WITHOUT_DOT}}-fpm -t ${{ secrets.DOCKER_ORGANIZATION }}/base-ws:${{WITH_DOT}}-fpm .
+          docker build -f ./Dockerfile-$WITHOUT_DOT-fpm -t ${{ secrets.DOCKER_ORGANIZATION }}/base-ws:$WITH_DOT-fpm .
           docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-          docker push ${DOCKER_ORGANIZATION}/base-ws:${{WITH_DOT}}-fpm
+          docker push ${DOCKER_ORGANIZATION}/base-ws:$WITH_DOT-fpm
 
