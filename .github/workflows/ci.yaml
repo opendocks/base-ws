@@ -13,6 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         php_version: [ "5.6", "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        files: [ "56", "70", "71", "72", "73", "74", "80", "81" ]
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
@@ -20,8 +21,7 @@ jobs:
           PHP_VERSION: ${{ matrix.php_version }}
         run: |
           set -eux
-          image_tag=${{ matrix.php_version }}  | sed 's/\.//'
-          docker build -f ./Dockerfile-${{ image_tag }}-fpm -t ${{ secrets.DOCKER_ORGANIZATION }}/base-ws:php-${{ matrix.php_version }} .
+          docker build -f ./Dockerfile-${{ matrix.files }}-fpm -t ${{ secrets.DOCKER_ORGANIZATION }}/base-ws:php-${{ matrix.php_version }} .
           docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-          docker push ${DOCKER_ORGANIZATION}/base-ws:${{ image_tag }}
+          docker push ${DOCKER_ORGANIZATION}/base-ws:${{ matrix.files }}-fpm
 
