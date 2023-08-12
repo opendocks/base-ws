@@ -1,6 +1,6 @@
 # Workspace Base Image
 
-[![Build Status](https://travis-ci.com/opendocks/base-ws.svg?branch=master)](https://travis-ci.com/opendocks/base-ws)
+[![Build Status](https://github.com/opendocks/base-ws/actions/workflows/docker-build.yaml/badge.svg)](https://github.com/opendocks/base-ws/actions)
 
 [Workspace Docker Hub Repository](https://cloud.docker.com/repository/docker/opendocks/base-ws)
 
