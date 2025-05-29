@@ -6,7 +6,7 @@
 
 FROM phusion/baseimage:18.04-1.0.0-amd64
 
-LABEL maintainer="Syed Ali Murtaza <>"
+LABEL maintainer="Syed Ali Murtaza <ali@kazmi.me>"
 
 RUN DEBIAN_FRONTEND=noninteractive
 RUN locale-gen en_US.UTF-8
@@ -31,22 +31,23 @@ RUN apt-get install -y software-properties-common && \
 RUN apt-get update && \
     apt-get upgrade -o DPkg::Options::="--force-confnew" -y --no-install-recommends --allow-downgrades --allow-remove-essential --allow-change-held-packages && \
     apt-get install -o DPkg::Options::="--force-confnew" -y --no-install-recommends --allow-downgrades --allow-remove-essential --allow-change-held-packages --allow-change-held-packages \
-        php7.3-cli \
-        php7.3-common \
-        php7.3-curl \
-        php7.3-intl \
-        php7.3-json \
-        php7.3-xml \
-        php7.3-mbstring \
-        php7.3-mysql \
-        php7.3-pgsql \
-        php7.3-sqlite \
-        php7.3-sqlite3 \
-        php7.3-zip \
-        php7.3-bcmath \
-        php7.3-memcached \
-        php7.3-gd \
-        php7.3-dev \
+        php7.0-cli \
+        php7.0-common \
+        php7.0-curl \
+        php7.0-intl \
+        php7.0-json \
+        php7.0-xml \
+        php7.0-mbstring \
+        php7.0-mcrypt \
+        php7.0-mysql \
+        php7.0-pgsql \
+        php7.0-sqlite \
+        php7.0-sqlite3 \
+        php7.0-zip \
+        php7.0-bcmath \
+        php7.0-memcached \
+        php7.0-gd \
+        php7.0-dev \
         pkg-config \
         libcurl4-openssl-dev \
         libedit-dev \
