@@ -4,7 +4,7 @@
 #--------------------------------------------------------------------------
 #
 
-FROM phusion/baseimage:focal-1.0.0
+FROM phusion/baseimage:noble-1.0.2
 
 LABEL maintainer="Syed Ali Murtaza <ali@kazmi.me>"
 
@@ -70,6 +70,3 @@ RUN apt-get update && \
 RUN curl -s http://getcomposer.org/installer | php && \
     echo "export PATH=${PATH}:/var/www/vendor/bin" >> ~/.bashrc && \
     mv composer.phar /usr/local/bin/composer
-
-# Source the bash
-RUN . ~/.bashrc

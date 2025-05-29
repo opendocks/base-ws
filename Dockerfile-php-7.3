@@ -28,9 +28,20 @@ RUN apt-get install -y software-properties-common && \
 #
 
 # Install "PHP Extentions", "libraries", "Software's"
-RUN apt-get update && \
-    apt-get upgrade -o DPkg::Options::="--force-confnew" -y --no-install-recommends --allow-downgrades --allow-remove-essential --allow-change-held-packages && \
-    apt-get install -o DPkg::Options::="--force-confnew" -y --no-install-recommends --allow-downgrades --allow-remove-essential --allow-change-held-packages --allow-change-held-packages \
+RUN set -eux \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+        software-properties-common \
+        lsb-release \
+        gnupg2 \
+        ca-certificates \
+        curl \
+    && add-apt-repository -y ppa:ondrej/php \
+    && echo 'DPkg::options { "--force-confdef"; };' >> /etc/apt/apt.conf \
+    && apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y --allow-downgrades --allow-remove-essential \
+        --allow-change-held-packages \
         php7.3-cli \
         php7.3-common \
         php7.3-curl \
@@ -70,6 +81,3 @@ RUN apt-get update && \
 RUN curl -s http://getcomposer.org/installer | php && \
     echo "export PATH=${PATH}:/var/www/vendor/bin" >> ~/.bashrc && \
     mv composer.phar /usr/local/bin/composer
-
-# Source the bash
-RUN . ~/.bashrc
